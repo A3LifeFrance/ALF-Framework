@@ -1,0 +1,157 @@
+disableChannels[]={{0,true,true},{1,true,true},{2,true,true},{3,true,true},{4,true,true},{5,true,true},{6,true,true}};
+enableDebugConsole = 0;
+
+#include "\ALF_Client\CfgRemoteExec.hpp"
+#include "\ALF_Client\dialog\MasterHandler.hpp"
+#include "\ALF_Client\Config_Master.hpp"
+#include "maverick\maverick_master.cpp"
+
+class CfgServer {
+	DatabaseName = "ArmaLife";
+	HeadlessMode = 1;
+	DebugMode = 0;
+};
+
+class RscTitles {
+	#include "\ALF_Client\dialog\progress.hpp"
+	#include "\ALF_Client\dialog\hud_stats.hpp"
+	#include "maverick\maverick_titles_master.cpp"
+};
+
+class CfgFunctions {
+	#include "\ALF_Client\Functions.hpp"
+	#include "maverick\maverick_functions_master.cpp"
+};
+
+onPauseScript = "\ALF_Client\core\functions\fn_escInterupt.sqf";
+skipLobby = 1;
+unsafeCVL=1;
+
+class CfgDebriefing
+{
+	class Apex
+	{
+		title = "DLC ERREUR";
+		subtitle = "DLC APEX MANQUANT.";
+		description = "Pour rejoindre le serveur, tu as besoin du DLC Apex. Merci.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Addons
+	{
+		title = "ADDONS ERREUR";
+		subtitle = "PACK ADDONS NON A JOUR";
+		description = "MERCI DE TELECHARGER LA DERNIERE VERSION DU PACK ADDONS DEPUIS NOTRE LAUNCHER.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class NoBDD
+	{
+		title = "ERREUR";
+		subtitle = "DOSSIER INTROUVABLE.";
+		description = "Nous ne trouvons pas dans notre base de donnée votre Visa. Merci de vous assurer que vous en possédez bien un.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class BadName
+	{
+		title = "NOM - NON CONFORME";
+		subtitle = "Ton nom est invalide.";
+		description = "Ton nom actuel n'est pas comme sur ton Visa. Reviens quand tu auras reprit tes esprits.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class BadVisa
+	{
+		title = "VISA NON CONFORME";
+		subtitle = "Tu n'es pas citoyen.";
+		description = "Il faut etre citoyen pour pour venir sur l'ile. Merci de valider votre Visa avec un operateur.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgDisabledCommands
+{
+  class CREATEUNIT
+  {
+    class SYNTAX1
+    {
+      targets[] = {0,0,0};
+      args[] = {{"STRING"},{"ARRAY"}};
+    };
+
+    class SYNTAX2
+    {
+      targets[] = {0,0,0};
+      args[] = {{"GROUP"},{"ARRAY"}};
+    };
+  };
+
+	class VEHICLES
+	{
+		targets[] = {1,0,1};
+	};
+	/*
+	class ALLPLAYERS
+	{
+		targets[] = {1,0,1};
+	};
+	
+	class ALLUNITS
+	{
+		targets[] = {1,0,1};
+	};
+	
+	class ALLMISSIONOBJECTS
+	{
+		class SYNTAX1
+		{
+			targets[] = {0,0,0};
+			args[] = {{},{"STRING"}};
+		};
+	};*/
+
+	class ALLGROUPS
+	{
+		targets[] = {1,0,1};
+	};
+
+	/*
+	class MARKERTEXT
+  {
+    class SYNTAX1
+    {
+      targets[] = {0,0,0};
+      args[] = {{},{"STRING"}};
+    };
+  };
+	*/
+
+  class SETMARKERTEXT
+  {
+    class SYNTAX1
+    {
+      targets[] = {0,0,0};
+      args[] = {{"STRING"},{"STRING"}};
+    };
+  };
+
+	class CREATEMARKER
+  {
+    class SYNTAX1
+    {
+      targets[] = {0,0,0};
+      args[] = {{},{"ARRAY"}};
+    };
+  };
+};

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="Arma3">
+	<Package name="CORP_TACTICAL_HAND_SIGNALS">
+		<Container name="ths">
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_NAME">
+				<Original>CORP Tactical Hand Signals v1.2.4</Original>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_OVERVIEW">
+				<Original>Enhance communication speed inside your squad with these simple and clear tactical hand signals.</Original>
+				<English>Enhance communication speed inside your squad with these simple and clear tactical hand signals.</English>
+				<French>Accélérez les échanges au sein de votre équipe par des gestes de communication tactiques simples et clairs.</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_WEBSITE">
+				<Original>Website</Original>
+				<English>Website</English>
+				<French>Site web</French>
+			</Key>
+
+		</Container>
+
+		<Container name="keys">
+
+			<!-- TOGGLE -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_TOGGLE">
+				<Original>Enable/Disable</Original>
+				<English>Enable/Disable</English>
+				<French>Activer/Désactiver</French>
+			</Key>
+
+			<!-- TAP SHOULDER -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_TAP_SHOULDER">
+				<Original>Tap Shoulder</Original>
+				<English>Tap Shoulder</English>
+				<French>Tap Shoulder</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_TAP_SHOULDER_ALT">
+				<Original>Tap Shoulder &#43; freelook</Original>
+				<English>Tap Shoulder &#43; freelook</English>
+				<French>Tap Shoulder &#43; vue libre</French>
+			</Key>
+
+			<!-- STOP -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_STOP">
+				<Original>Stop</Original>
+				<English>Stop</English>
+				<French>Stop</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_STOP_ALT">
+				<Original>Stop &#43; freelook</Original>
+				<English>Stop &#43; freelook</English>
+				<French>Stop &#43; vue libre</French>
+			</Key>
+
+			<!-- COVER -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_COVER">
+				<Original>Get cover</Original>
+				<English>Get cover</English>
+				<French>À couvert</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_COVER_ALT">
+				<Original>Get cover &#43; freelook</Original>
+				<English>Get cover &#43; freelook</English>
+				<French>À couvert &#43; vue libre</French>
+			</Key>
+
+			<!-- REGROUP -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_REGROUP">
+				<Original>Rally up</Original>
+				<English>Rally up</English>
+				<French>Regroupement</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_REGROUP_ALT">
+				<Original>Rally up &#43; freelook</Original>
+				<English>Rally up &#43; freelook</English>
+				<French>Regroupement &#43; vue libre</French>
+			</Key>
+
+			<!-- FORWARD -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_FORWARD">
+				<Original>Move forward</Original>
+				<English>Move forward</English>
+				<French>En avant</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_FORWARD_ALT">
+				<Original>Move forward &#43; freelook</Original>
+				<English>Move forward &#43; freelook</English>
+				<French>En avant &#43; vue libre</French>
+			</Key>
+
+			<!-- ENGAGE -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_ENGAGE">
+				<Original>Engage</Original>
+				<English>Engage</English>
+				<French>Engager</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_ENGAGE_ALT">
+				<Original>Engage &#43; freelook</Original>
+				<English>Engage &#43; freelook</English>
+				<French>Engager &#43; vue libre</French>
+			</Key>
+
+			<!-- POINT -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_POINT">
+				<Original>Point</Original>
+				<English>Point</English>
+				<French>Pointer</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_POINT_ALT">
+				<Original>Point &#43; freelook</Original>
+				<English>Point &#43; freelook</English>
+				<French>Pointer &#43; vue libre</French>
+			</Key>
+
+			<!-- HOLD -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_HOLD">
+				<Original>Hold</Original>
+				<English>Hold</English>
+				<French>Tenir</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_HOLD_ALT">
+				<Original>Hold &#43; freelook</Original>
+				<English>Hold &#43; freelook</English>
+				<French>Tenir &#43; vue libre</French>
+			</Key>
+
+			<!-- WARNING -->
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_WARNING">
+				<Original>Warning</Original>
+				<English>Warning</English>
+				<French>Attention</French>
+			</Key>
+
+			<Key ID="STR_CRP_TACTICAL_HAND_SIGNALS_WARNING_ALT">
+				<Original>Warning &#43; freelook</Original>
+				<English>Warning &#43; freelook</English>
+				<French>Attention &#43; vue libre</French>
+			</Key>
+
+		</Container>
+	</Package>
+</Project>

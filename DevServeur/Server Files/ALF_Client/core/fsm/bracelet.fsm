@@ -1,0 +1,135 @@
+/*%FSM<COMPILE "scriptedFSM.cfg, bracelet">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Init",0,250,-38.865631,-149.147995,51.134369,-99.147995,0.000000,"Init"};
+item1[] = {"true",8,218,-39.045898,-59.320892,50.954102,-9.320892,0.000000,"true"};
+item2[] = {"Obligatoire",2,250,-39.589691,19.937195,50.410324,69.937195,0.000000,"Obligatoire"};
+item3[] = {"Wait_Time",4,218,-126.886063,100.113083,-36.886078,150.113083,0.000000,"Wait" \n "Time"};
+item4[] = {"HUD",3,250,-66.106140,187.979080,23.893860,237.979080,0.000000,"HUD"};
+item5[] = {"true",8,218,-264.820709,251.913116,-174.820724,301.913116,0.000000,"true"};
+item6[] = {"",7,210,-224.313080,40.507652,-216.313080,48.507645,0.000000,""};
+item7[] = {"Test_if_not__have",4,218,106.697449,23.696091,196.697449,73.696091,1.000000,"Test if not " \n "have bracelet"};
+item8[] = {"End",1,250,238.326050,39.607239,328.326080,89.607224,0.000000,"End"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {2,7};
+link4[] = {3,4};
+link5[] = {4,5};
+link6[] = {5,6};
+link7[] = {6,2};
+link8[] = {7,8};
+globals[] = {0.000000,0,0,0,0,640,480,1,14,6316128,1,-503.711609,511.708313,444.295654,-204.122467,1400,894,1};
+window[] = {2,-1,-1,-1,-1,977,192,1632,192,3,1422};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "bracelet";
+        class States
+        {
+                /*%FSM<STATE "Init">*/
+                class Init
+                {
+                        name = "Init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+                         "" \n
+                         "if !(isNil {_this select 0}) then {" \n
+                         "	ALF_TimeBracelet = _this select 0;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Obligatoire";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Obligatoire">*/
+                class Obligatoire
+                {
+                        name = "Obligatoire";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Test_if_not__have">*/
+                                class Test_if_not__have
+                                {
+                                        itemno = 7;
+                                        priority = 1.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(player getVariable [""Bracelet"",false])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Wait_Time">*/
+                                class Wait_Time
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="HUD";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _time) > 1)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "HUD">*/
+                class HUD
+                {
+                        name = "HUD";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"ALF_TimeBracelet = ALF_TimeBracelet - 1;" \n
+                         "" \n
+                         "_time = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="Obligatoire";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="Init";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

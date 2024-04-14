@@ -1,0 +1,181 @@
+/*%FSM<COMPILE "scriptedFSM.cfg, cleanup">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-65.004578,-391.651611,24.995417,-341.651672,0.000000,"init"};
+item1[] = {"true",8,218,-62.976639,-315.185364,27.023363,-265.185364,0.000000,"true"};
+item2[] = {"Share__Work_load",2,250,-64.183350,-224.681931,25.816656,-174.681931,0.000000,"Share " \n "Work-load"};
+item3[] = {"true",8,218,-54.709698,75.189262,35.290302,125.189262,0.000000,"true"};
+item4[] = {"Time_Check",4,218,-219.425827,-133.310532,-129.425964,-83.310455,0.000000,"Time Check"};
+item5[] = {"Delete_Dead_Cars",2,4346,-220.186951,-29.248400,-130.187195,20.751413,0.000000,"Delete" \n "Dead" \n "Cars"};
+item6[] = {"",7,210,-312.538239,95.295059,-304.538239,103.295059,0.000000,""};
+item7[] = {"",7,210,-311.750000,-203.033707,-303.750000,-195.033707,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,4};
+link3[] = {3,6};
+link4[] = {4,5};
+link5[] = {5,3};
+link6[] = {6,7};
+link7[] = {7,2};
+globals[] = {0.000000,0,0,0,0,640,480,1,46,6316128,1,-422.625397,41.336029,189.084412,-441.646576,651,924,1};
+window[] = {2,-1,-1,-1,-1,942,182,1825,182,3,669};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "cleanup";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_impound"",""_cars"",""_objs"",""_totCars"",""_thread""];" \n
+                         "_impound = time;" \n
+                         "_cars = time;" \n
+                         "_objs = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Share__Work_load">*/
+                class Share__Work_load
+                {
+                        name = "Share__Work_load";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Time_Check">*/
+                                class Time_Check
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="Delete_Dead_Cars";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _cars) > 60)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Delete_Dead_Cars">*/
+                class Delete_Dead_Cars
+                {
+                        name = "Delete_Dead_Cars";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"{" \n
+                         "    if (!(alive _x) && {!(_x isKindOf ""Ship"")} && {(_x isKindOf ""Car"") || {(_x isKindOf ""Air"")}} && {ALF_Count_Meds >= 7} && {(speed _x) isEqualTo 0} && {!(_x getVariable [""ALF_InFire"",false])} && {!(_x getVariable [""ALF_AlreadyFired"",false])}) then {" \n
+                         "        _x setVariable [""ALF_InFire"",true];" \n
+                         "		  _x setVariable [""ALF_AlreadyFired"",true];" \n
+                         "        [_x] spawn HC_fnc_createFireVehicle;" \n
+                         "    };" \n
+                         "	if (!(alive _x) && {!(_x getVariable [""ALF_InFire"",false])} && {(speed _x) isEqualTo 0} && {(_x isKindOf ""Car"") || {(_x isKindOf ""Air"")} || {(_x isKindOf ""Ship"")}}) then {" \n
+                         "		_dbInfo = _x getVariable[""dbInfo"",[]];" \n
+                         "		if(count _dbInfo > 0) then {" \n
+                         "			_uid = _dbInfo select 0;" \n
+                         "			_plate = _dbInfo select 1;" \n
+                         "			_plate = [_plate] call HC_fnc_mresArray;" \n
+                         " 			_insure = _dbInfo select 2;" \n
+                         "          _insurecount = _dbInfo select 3;" \n
+                         "			if (_uid in [-1,-2]) then {" \n
+                         "				if (_uid isEqualTo -1) then {" \n
+                         "					_query = format[""UPDATE vehicles_cop SET alive='1', active='0', gear='""""[]""""', damage='""""[]""""' WHERE plate='%1'"",_plate];" \n
+                         "					[_query,1] call HC_fnc_asyncCall;" \n
+                         "				} else {" \n
+                         "					_query = format[""UPDATE vehicles_med SET alive='1', active='0', gear='""""[]""""', damage='""""[]""""' WHERE plate='%1'"",_plate];" \n
+                         "					[_query,1] call HC_fnc_asyncCall;" \n
+                         "				};" \n
+                         "			} else {" \n
+                         "				if (_insure >= 2) then {" \n
+                         "					_query = format[""UPDATE vehicles SET alive='1', active='0', gear='""""[]""""', damage='""""[]""""' WHERE pid='%1' AND plate='%2'"",_uid,_plate];" \n
+                         "					[_query,1] call HC_fnc_asyncCall;" \n
+                         "				} else {" \n
+                         "					if (_insurecount >= 2) then {" \n
+                         "	                	_query = format[""UPDATE vehicles SET alive='0', gear='""""[]""""' WHERE pid='%1' AND plate='%2'"",_uid,_plate];" \n
+                         "				    	[_query,1] call HC_fnc_asyncCall;" \n
+                         "	                	private _e = false;" \n
+                         "	                	{" \n
+                         "	        	       		if((getPlayerUID _x) isEqualTo _uid) exitWith {" \n
+                         "	        		        	[] remoteExecCall [""ALF_fnc_removeAxaCount"",_x];" \n
+                         "	        		        	_e = true;" \n
+                         "	        	        	};" \n
+                         "	                	} forEach playableUnits;" \n
+                         "" \n
+                         "	                	if !(_e) then {" \n
+                         "	        	        	[format[""UPDATE players SET axacount=axacount-1 WHERE playerid='%1'"",_uid],1] call HC_fnc_asyncCall;" \n
+                         "	                	};" \n
+                         "	            	} else {" \n
+                         "	                	if (_insure isEqualTo 1) then {" \n
+                         "			            	_query = format[""UPDATE vehicles SET alive='1', active='0', insure='0', insurecount=(insurecount + 1), gear='""""[]""""', damage='""""[]""""', insuretime='7' WHERE pid='%1' AND plate='%2'"",_uid,_plate];" \n
+                         "				        	[_query,1] call HC_fnc_asyncCall;" \n
+                         "	                    	private _e = false;" \n
+                         "	                    	{" \n
+                         "	          	            	if((getPlayerUID _x) isEqualTo _uid) exitWith {" \n
+                         "	          		            	[] remoteExecCall [""ALF_fnc_removeAxaCount"",_x];" \n
+                         "	          		            	_e = true;" \n
+                         "	            	        	};" \n
+                         "	                    	} forEach playableUnits;" \n
+                         "" \n
+                         "	                    	if !(_e) then {" \n
+                         "	          	            	[format[""UPDATE players SET axacount=axacount-1 WHERE playerid='%1'"",_uid],1] call HC_fnc_asyncCall;" \n
+                         "	                    	};" \n
+                         "			        	} else {" \n
+                         "				        	_query = format[""UPDATE vehicles SET alive='0', gear='""""[]""""' WHERE pid='%1' AND plate='%2'"",_uid,_plate];" \n
+                         "				        	[_query,1] call HC_fnc_asyncCall;" \n
+                         "				        };" \n
+                         "			        };" \n
+                         "	            };" \n
+                         "			};" \n
+                         "		};" \n
+                         "" \n
+                         "		if(!isNil ""_x"" && {!isNull _x}) then {" \n
+                         "            {" \n
+                         "				detach _x;" \n
+                         "				deleteVehicle _x;" \n
+                         "			} forEach (attachedObjects _x);" \n
+                         "			deleteVehicle _x;" \n
+                         "		};" \n
+                         "	};" \n
+                         "} forEach (allDead);" \n
+                         "" \n
+                         "_cars = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/
